@@ -84,6 +84,15 @@ public class ContextV1Test {
         context2.execute();
     }
 
+    @Test
+    void strategyV4() {
+        ContextV1 context1 = new ContextV1(() -> log.info("전략 서비스 로직 1 호출"));
+        context1.execute();
+
+        ContextV1 context2 = new ContextV1(() -> log.info("전략 서비스 로직 2 호출"));
+        context2.execute();
+    }
+
 
 
 }
