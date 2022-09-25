@@ -2,6 +2,7 @@ package hello.advanced.trace.strategy;
 
 
 import hello.advanced.trace.strategy.code.strategy.ContextV1;
+import hello.advanced.trace.strategy.code.strategy.Strategy;
 import hello.advanced.trace.strategy.code.strategy.StrategyLogic1;
 import hello.advanced.trace.strategy.code.strategy.StrategyLogic2;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,29 @@ public class ContextV1Test {
 
         StrategyLogic2 logic2 = new StrategyLogic2();
         ContextV1 context2 = new ContextV1(logic2);
+        context2.execute();
+    }
+
+    @Test
+    void strategyV2() {
+        Strategy strategy1 = new Strategy() {
+            @Override
+            public void call() {
+                log.info("전략 서비스 로직 1 호출");
+            }
+        };
+        log.info("strategy1={}", strategy1.getClass());
+        ContextV1 context1 = new ContextV1(strategy1);
+        context1.execute();
+
+        Strategy strategy2 = new Strategy() {
+            @Override
+            public void call() {
+                log.info("전략 서비스 로직 2 호출");
+            }
+        };
+        log.info("strategy2={}", strategy2.getClass());
+        ContextV1 context2 = new ContextV1(strategy2);
         context2.execute();
     }
 
