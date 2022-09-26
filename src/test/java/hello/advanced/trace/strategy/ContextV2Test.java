@@ -19,6 +19,32 @@ public class ContextV2Test {
         contextV2.execute(new StrategyLogic2());
     }
 
+    //익명 함수
+    @Test
+    void strategyV2() {
+        ContextV2 contextV2 = new ContextV2();
+        contextV2.execute(new Strategy() {
+            @Override
+            public void call() {
+                log.info("서비스 로직 1 호출");
+            }
+        });
+        contextV2.execute(new Strategy() {
+            @Override
+            public void call() {
+                log.info("서비스 로직 2 호출");
+            }
+        });
+    }
+
+    //익명 함수 - 람다
+    @Test
+    void strategyV3() {
+        ContextV2 contextV2 = new ContextV2();
+        contextV2.execute(() -> log.info("서비스 로직 1 호출"));
+        contextV2.execute(() -> log.info("서비스 로직 2 호출"));
+    }
+
 
 
 }
