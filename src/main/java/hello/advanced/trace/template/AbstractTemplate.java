@@ -15,7 +15,7 @@ public abstract class AbstractTemplate<T> {
         TraceStatus status = null;
         try{
             status = trace.begin(message);
-            T result = call();
+            T result = this.call();
             trace.end(status);
             return result;
         } catch(Exception e) {
@@ -25,4 +25,5 @@ public abstract class AbstractTemplate<T> {
     }
 
     protected abstract T call();
+
 }
