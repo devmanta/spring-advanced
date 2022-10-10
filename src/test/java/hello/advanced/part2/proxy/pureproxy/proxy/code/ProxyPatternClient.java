@@ -1,10 +1,10 @@
 package hello.advanced.part2.proxy.pureproxy.proxy.code;
 
-public class ProxyPatternSubject {
+public class ProxyPatternClient {
 
     private final Subject subject;
 
-    public ProxyPatternSubject(Subject subject) {
+    public ProxyPatternClient(Subject subject) {
         this.subject = subject;
     }
 
