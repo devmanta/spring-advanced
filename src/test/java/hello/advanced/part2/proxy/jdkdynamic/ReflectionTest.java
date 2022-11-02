@@ -38,6 +38,27 @@ public class ReflectionTest {
         log.info("invoke2={}", invoke2);
     }
 
+    @Test
+    void reflection2() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        //reflection은 근데 런타임에 동작되기 때문에 컴파일 시점에 에러를 잡을 수 없기 떄문에 주의해야한다.
+        Class<?> classHello = Class.forName("hello.advanced.part2.proxy.jdkdynamic.ReflectionTest$Hello");// 내부 클래스는 $로 접근해야함!
+
+        Hello target = new Hello();
+
+        Method methodCallA = classHello.getMethod("callA");
+        this.dynamicCall(methodCallA, target);
+
+        Method methodCallB = classHello.getMethod("callB");
+        this.dynamicCall(methodCallB, target);
+    }
+
+    private void dynamicCall(Method method, Object target) throws InvocationTargetException, IllegalAccessException {
+        log.info("start");
+        Object result = method.invoke(target);
+        log.info("result={}", result);
+        log.info("end");
+    }
+
     @Slf4j
     static class Hello {
         public String callA() {
