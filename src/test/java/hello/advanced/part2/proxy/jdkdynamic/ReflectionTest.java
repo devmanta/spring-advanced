@@ -1,5 +1,7 @@
 package hello.advanced.part2.proxy.jdkdynamic;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +23,20 @@ public class ReflectionTest {
         log.info("end");
     }
 
+    @Test
+    void reflection1() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<?> classHello = Class.forName("hello.advanced.part2.proxy.jdkdynamic.ReflectionTest$Hello");// 내부 클래스는 $로 접근해야함!
+
+        Hello target = new Hello();
+
+        Method methodCallA = classHello.getMethod("callA");
+        Object invoke1 = methodCallA.invoke(target); // target 인스턴스에 있는 callA를 호출하는 것임
+        log.info("invoke1={}", invoke1);
+
+        Method methodCallB = classHello.getMethod("callB");
+        Object invoke2 = methodCallB.invoke(target);
+        log.info("invoke2={}", invoke2);
+    }
 
     @Slf4j
     static class Hello {
