@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 public class InterfaceProxyConfig {
 
     @Bean
-    public ProxyOrderControllerV1 proxyOrderController(LogTrace logTrace) {
+    public ProxyOrderControllerV1 proxyOrderController(LogTrace logTrace) { //logTrace가 빨간 줄 날 수도 있음. 왜냐면 logTrace는 SpringBootApplication 메소드에서 bean 생성하기 때문에
         ProxyOrderControllerV1Impl controllerImpl = new ProxyOrderControllerV1Impl(proxyOrderService(logTrace));
         return new OrderControllerInterfaceProxy(controllerImpl, logTrace);
     }
